@@ -1,0 +1,21 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.uv/
+
+# Node / Next.js
+node_modules/
+.next/
+apps/web/.next/
+npm-debug.log*
+
+# Misc
+.DS_Store
+report.md
+*.log

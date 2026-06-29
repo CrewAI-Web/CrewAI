@@ -1,0 +1,61 @@
+/* ===========================================================================
+   crewai_claude_v1 — Design Token System
+   Single source of truth for color, type, spacing, radius, motion, elevation.
+   Consumed by every component via CSS custom properties.
+   =========================================================================== */
+:root {
+  /* ---- Brand palette ---- */
+  --navy-900: #0a0f1f;   /* app background (deepest) */
+  --navy-800: #0e1530;   /* panels */
+  --navy-700: #141d3d;   /* raised cards */
+  --navy-600: #1d2950;   /* borders / hover */
+
+  --blue-400: #4cc9f0;   /* light-blue accent / highlights */
+  --blue-300: #7ad7f5;
+  --blue-glow: rgba(76, 201, 240, 0.35);
+
+  --pink-400: #ff7eb6;   /* soft-pink interactive / CTA */
+  --pink-500: #ff5fa2;
+  --pink-glow: rgba(255, 95, 162, 0.35);
+
+  /* ---- Text ---- */
+  --text-hi: #eaf0ff;    /* primary text */
+  --text-mid: #aab4d4;   /* secondary */
+  --text-lo: #6b769b;    /* muted / captions */
+
+  /* ---- Semantic ---- */
+  --ok: #4ade80;
+  --warn: #fbbf24;
+  --err: #f87171;
+
+  /* ---- Gradients ---- */
+  --grad-cta: linear-gradient(135deg, var(--pink-400), var(--pink-500));
+  --grad-accent: linear-gradient(135deg, var(--blue-400), #5a8dff);
+  --grad-surface: linear-gradient(180deg, var(--navy-800), var(--navy-900));
+
+  /* ---- Type ---- */
+  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-md: 1rem;
+  --fs-lg: 1.25rem; --fs-xl: 1.75rem; --fs-2xl: 2.5rem;
+
+  /* ---- Spacing (8pt) ---- */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+
+  /* ---- Radius / elevation / motion ---- */
+  --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-pill: 999px;
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 0 1px var(--blue-glow), 0 8px 40px var(--blue-glow);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 220ms;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--text-hi);
+  background: var(--grad-surface);
+  -webkit-font-smoothing: antialiased;
+}

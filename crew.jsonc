@@ -1,0 +1,101 @@
+{
+  // Display name for this crew
+  "name": "crewai_claude_v1",
+
+  // Agents to include — each must have a matching agents/<name>.jsonc file
+  "agents": [
+    "senior_research_analyst",
+    "data_and_system_analyst",
+    "ui_ux_designer",
+    "lead_software_engineer",
+    "backend_engineer",
+    "frontend_engineer",
+    "mobile_app_developer",
+    "devops_engineer",
+    "github_release_specialist",
+    "technical_content_and_document",
+    "linkedin_content_creator"
+  ],
+
+  // Task definitions — executed in order for the "sequential" process.
+  // Each task receives the prior tasks' outputs as context.
+  "tasks": [
+    {
+      "name": "research_task",
+      "description": "Research the project topic {topic}: gather requirements, references, comparable products, and relevant API data. Ensure findings are accurate and current.",
+      "expected_output": "A structured research brief with verified sources, constraints, and feature inventory.",
+      "agent": "senior_research_analyst"
+    },
+    {
+      "name": "analysis_task",
+      "description": "Turn the research brief into a technical specification: data models, system architecture, API contracts, and a phased implementation plan.",
+      "expected_output": "A technical spec: architecture diagram (text), data schemas, endpoint list, and milestone breakdown.",
+      "agent": "data_and_system_analyst"
+    },
+    {
+      "name": "design_task",
+      "description": "From the spec, define UX flows and a design-token system (color, type, spacing, motion) and component specs for the {topic} app. Honor the Deep Navy / Light Blue / Soft Pink palette.",
+      "expected_output": "User flows, wireframe descriptions, and a concrete design-tokens.json plus component specs.",
+      "agent": "ui_ux_designer"
+    },
+    {
+      "name": "backend_task",
+      "description": "Implement the backend per the spec: APIs, database schema, auth, validation, and tests. Save runnable files to the workspace.",
+      "expected_output": "Production-ready backend source files with tests and a run command.",
+      "agent": "backend_engineer"
+    },
+    {
+      "name": "frontend_task",
+      "description": "Implement the responsive web client consuming the backend APIs and using the design tokens. Build reusable, accessible components.",
+      "expected_output": "Runnable frontend component files matching the design system.",
+      "agent": "frontend_engineer"
+    },
+    {
+      "name": "mobile_task",
+      "description": "Implement the cross-platform mobile client sharing the API layer and design tokens with the web client.",
+      "expected_output": "Runnable mobile app source (React Native/Expo or Flutter) with shared brand parity.",
+      "agent": "mobile_app_developer"
+    },
+    {
+      "name": "devops_task",
+      "description": "Containerize the services and author CI/CD pipelines, IaC, and deployment manifests with secrets handling and health checks.",
+      "expected_output": "Dockerfiles, GitHub Actions workflows, and deployment manifests.",
+      "agent": "devops_engineer"
+    },
+    {
+      "name": "release_task",
+      "description": "Commit the work on a feature branch, open a pull request, and (on approval) cut a semver release with a generated changelog via the official GitHub API.",
+      "expected_output": "A PR URL, release tag, and changelog. No force-pushes; conventional commits only.",
+      "agent": "github_release_specialist"
+    },
+    {
+      "name": "documentation_task",
+      "description": "Write the README, API docs, and an architecture overview explaining how to run and deploy the system.",
+      "expected_output": "Polished markdown documentation saved to the workspace.",
+      "agent": "technical_content_and_document"
+    },
+    {
+      "name": "milestone_announcement_task",
+      "description": "Draft a LinkedIn post announcing this milestone for {topic}. Summarize what shipped, the stack, and the impact. Output the draft for human approval; only publish via the official LinkedIn API after explicit approval.",
+      "expected_output": "An approval-ready LinkedIn post draft (hook, body, hashtags, CTA). Publishing requires human sign-off.",
+      "agent": "linkedin_content_creator"
+    }
+  ],
+
+  // "sequential" — tasks run in order, each receiving prior task outputs.
+  // Switch to "hierarchical" + set "manager_llm" to let a manager delegate dynamically.
+  "process": "sequential",
+
+  "verbose": true,
+  "memory": true,
+  "planning": true,
+
+  // For hierarchical mode, uncomment and set a strong reasoning model as manager:
+  // "process": "hierarchical",
+  // "manager_llm": "anthropic/claude-opus-4-8",
+
+  // Runtime inputs. `crewai run` prompts for any {placeholder} not provided here.
+  "inputs": {
+    "topic": "a full-stack task management app"
+  }
+}

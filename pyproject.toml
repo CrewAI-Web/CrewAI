@@ -1,0 +1,23 @@
+[project]
+name = "crewai_claude_v1"
+version = "1.0.0"
+description = "Full-stack AI delivery crew (web + mobile) built on crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=1.15.1,<2.0.0",
+    "requests>=2.32.0",      # used by tools/github_tool.py and tools/linkedin_tool.py
+    "fastapi>=0.115.0",       # backend bridge for the web dashboard
+    "uvicorn[standard]>=0.30.0"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["agents", "crew.jsonc", "tools", "knowledge", "skills"]
+
+[tool.crewai]
+type = "crew"
+definition = "crew.jsonc"
